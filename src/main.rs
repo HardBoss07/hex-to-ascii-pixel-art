@@ -27,9 +27,11 @@ fn main() -> io::Result<()> {
     }
 
     let binary_representation = hex_to_binary(&contents);
+    let square_representation = binary_to_square(&binary_representation);
     
     println!("{}", contents);
     println!("{}", binary_representation);
+    println!("{}", square_representation);
     
     Ok(())
 }
@@ -50,4 +52,23 @@ fn hex_to_binary(hex_string: &str) -> String {
     }
 
     binary_string
+}
+
+fn binary_to_square(bin_str: &str) -> String {
+    let mut square_string = String::new();
+
+    for c in bin_str.chars() {
+        if c == '\n' {
+            square_string.push('\n');
+            continue;
+        }
+
+        if c == '1' {
+            square_string.push('█');
+        } else {
+            square_string.push(' ');
+        }
+    }
+
+    square_string
 }
