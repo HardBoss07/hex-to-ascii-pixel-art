@@ -26,7 +26,28 @@ fn main() -> io::Result<()> {
         contents.push('\n');
     }
 
+    let binary_representation = hex_to_binary(&contents);
+    
     println!("{}", contents);
+    println!("{}", binary_representation);
     
     Ok(())
+}
+
+fn hex_to_binary(hex_string: &str) -> String {
+    let mut binary_string = String::new();
+
+    for c in hex_string.chars() {
+        if c == '\n' {
+            binary_string.push('\n');
+            continue;
+        }
+
+        if c.is_digit(16) {
+            let bin_str = format!("{:04b}", c.to_digit(16).unwrap());
+            binary_string.push_str(&bin_str);
+        }
+    }
+
+    binary_string
 }
